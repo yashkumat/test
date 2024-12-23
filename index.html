@@ -129,6 +129,12 @@
         <div class="spacer">
             &nbsp;
         </div>
+        <div class="row" style="margin-top: 50px !important;">
+            <div class="col-md-12 text-center">
+                <h5 id="your_score"></h5>
+                <p id="message" class="mt-3"></p>
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-12">
                 <span id="questions"></span>
@@ -149,12 +155,6 @@
         </div>
         <div class="row">
             <div class="col-md-12 text-center">
-                <h5 id="your_score"></h5>
-                <p id="message"></p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12 text-center">
                 <form method="POST"
                     action="https://script.google.com/macros/s/AKfycbxCCGFCjBzusclxWhfoUuouillLBgRX1v7UbYvsxgeAbXYEWiYWwvtydbBknOgCVcEg/exec"
                     id="submit_form">
@@ -166,7 +166,6 @@
                 </form>
             </div>
         </div>
-
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
@@ -256,9 +255,11 @@
 
         form.addEventListener("submit", function (e) {
             e.preventDefault();
+            clearInterval(countdownInterval);
             const data = new FormData(form);
             const action = e.target.action;
             document.getElementById('message').innerHTML = "Saving..."
+            document.getElementById('questions').classList.add('d-none');
             controlButton.disabled = true
             fetch(action, {
                 method: 'POST',
@@ -293,6 +294,9 @@
         }
 
         function score() {
+            if (controlButton.disabled) {
+                document.getElementById('yourname').focus()
+            }
             your_score = 0;
             for (j = 0; j < questions.length; j++) {
                 let selected_ans = document.querySelector('input[name="optforque' + j + '"]:checked')
