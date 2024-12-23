@@ -161,6 +161,7 @@
                     <input class="form-control form-control-sm d-none my-2" id="yourname" onkeypress="enable_submit()" type="text" name="Name"
                         placeholder="Your Full Name" required>
                     <input type="hidden" id="score_hidden" name="Score">
+                    <input type="hidden" id="time_hidden" name="Time">
                     <button class="btn h1 mb-3" type="button" id="control-button" onclick="getQuestions()">Start
                         test</button>
                 </form>
@@ -186,6 +187,7 @@
         const url = "https://docs.google.com/spreadsheets/d/1Vme1XqtDqfsRcnrw9OCF5PSQ8YhAyKiG1pSDDqgpCG0/export?format=csv"
         let controlButton = document.getElementById('control-button')
         var countdownInterval;
+        let test_details;
         
         function getQuestions() {
             document.getElementById('instructions').classList.add('d-none');
@@ -316,6 +318,7 @@
             }
             document.getElementById('your_score').innerText = "Your Score: " + your_score + " / " + questions.length;
             document.getElementById('score_hidden').value = your_score
+            document.getElementById('time_hidden').value = test_details.opt2 - timeLeft
             let name_user = document.getElementById('yourname').value
             if (name_user) {
                 document.getElementById('submit_form').requestSubmit();
