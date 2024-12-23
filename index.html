@@ -178,37 +178,16 @@
     <script src="https://cdn.rawgit.com/Keyang/node-csvtojson/d41f44aa/browser/csvtojson.min.js"></script>
 
     <script>
+        
         let timeLeft = 30;  //  in seconds
         const form = document.getElementById('submit_form');
-        form.addEventListener("submit", function (e) {
-            e.preventDefault();
-            const data = new FormData(form);
-            const action = e.target.action;
-            document.getElementById('message').innerHTML = "Saving..."
-            controlButton.disabled = true
-            fetch(action, {
-                method: 'POST',
-                body: data,
-            })
-                .then(() => {
-                    document.getElementById('yourname').classList.add('d-none');
-                    document.getElementById('message').innerHTML = "Saved."
-                    setTimeout(() => {
-                        document.getElementById('message').innerHTML = ""
-                    }, 1000)
-                    controlButton.disabled = false
-                    controlButton.innerHTML = "Reset"
-                    document.getElementById('questions').classList.remove('d-none');
-                    document.getElementById('submiting_form').classList.add('d-none');
-                    controlButton.setAttribute("onClick", "reset_func();");
-                })
-        });
-
         let questions = [];
         let your_score = 0;
         let title = '';
         const url = "https://docs.google.com/spreadsheets/d/1Vme1XqtDqfsRcnrw9OCF5PSQ8YhAyKiG1pSDDqgpCG0/export?format=csv"
         let controlButton = document.getElementById('control-button')
+        var countdownInterval;
+        
         function getQuestions() {
             document.getElementById('instructions').classList.add('d-none');
             let questions_body = `<div id="questions_body">`
@@ -253,7 +232,7 @@
                     controlButton.disabled = true
 
                     const timerElement = document.getElementById('time-left');
-                    const countdownInterval = setInterval(() => {
+                    countdownInterval = setInterval(() => {
                         timeLeft--;  // Decrease the time by 1 second
 
                         // Update the displayed time
@@ -273,6 +252,44 @@
 
         function enable_submit() {
             controlButton.disabled = false
+        }
+
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            const data = new FormData(form);
+            const action = e.target.action;
+            document.getElementById('message').innerHTML = "Saving..."
+            controlButton.disabled = true
+            fetch(action, {
+                method: 'POST',
+                body: data,
+            })
+                .then(() => {
+                    document.getElementById('yourname').classList.add('d-none');
+                    document.getElementById('message').innerHTML = "Saved."
+                    setTimeout(() => {
+                        document.getElementById('message').innerHTML = ""
+                    }, 1000)
+                    controlButton.disabled = false
+                    controlButton.innerHTML = "Reset"
+                    document.getElementById('questions').classList.remove('d-none');
+                    document.getElementById('submiting_form').classList.add('d-none');
+                    controlButton.setAttribute("onClick", "reset_func();");
+                })
+        });
+
+        function updateProgressBar() {
+            const totalQuestions = questions.length;
+            const answeredQuestions = document.querySelectorAll('input[type="radio"]:checked').length;
+            const progress = (answeredQuestions / totalQuestions) * 100;
+            const progressBar = document.getElementById('progress-bar');
+            progressBar.style.width = `${progress}%`;
+            progressBar.setAttribute('aria-valuenow', progress);
+        }
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = seconds % 60;
+            return `${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
         }
 
         function score() {
@@ -308,19 +325,6 @@
             window.location.reload();
         }
         
-        function updateProgressBar() {
-            const totalQuestions = questions.length;
-            const answeredQuestions = document.querySelectorAll('input[type="radio"]:checked').length;
-            const progress = (answeredQuestions / totalQuestions) * 100;
-            const progressBar = document.getElementById('progress-bar');
-            progressBar.style.width = `${progress}%`;
-            progressBar.setAttribute('aria-valuenow', progress);
-        }
-        function formatTime(seconds) {
-            const minutes = Math.floor(seconds / 60);
-            const remainingSeconds = seconds % 60;
-            return `${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
-        }
     </script>
 </body>
 
