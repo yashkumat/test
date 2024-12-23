@@ -207,7 +207,7 @@
                     selected_ans.nextElementSibling.classList.add('border-danger')
                 }
             }
-            document.getElementById('your_score').innerText = "Your Score: " + your_score + "/10"
+            document.getElementById('your_score').innerText = "Your Score: " + your_score + " / " + questions.length;
             document.getElementById('score_hidden').value = your_score
             let name_user = document.getElementById('yourname').value
             if (name_user) {
