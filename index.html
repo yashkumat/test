@@ -85,6 +85,21 @@
                 width: 100% !important;
             }
         }
+        .instruction-box {
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            line-height: 1.6;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .instruction-box h3 {
+            margin-top: 0;
+            color: #333;
+            font-size: 16px;
+        }
     </style>
 </head>
 <body>
@@ -98,6 +113,16 @@
         <div class="row">
             <div class="col-md-12">
                 <span id="questions"></span>
+                <div id="instructions" class="instruction-box mt-3">
+                    <h3>How to Take the Test</h3>
+                    <ul>
+                        <li>Click "Start Test" to begin.</li>
+                        <li>Answer each question by selecting the correct option.</li>
+                        <li>Enter your name after you have answered final question.</li>
+                        <li>Click "Submit" after entering the name to finish.</li>
+                        <li>Your score will be displayed at the end.</li>
+                    </ul>
+                </div>
             </div>
         </div>
         <div class="row">
@@ -160,6 +185,7 @@
         const url = "https://docs.google.com/spreadsheets/d/1Vme1XqtDqfsRcnrw9OCF5PSQ8YhAyKiG1pSDDqgpCG0/export?format=csv"
         let controlButton = document.getElementById('control-button')
         function getQuestions() {
+            document.getElementById('instructions').classList.add('d-none');
             let questions_body = `<div id="questions_body">`
             controlButton.innerHTML = "Loading..."
             fetch(url).then(data => data.text()).then(csvdata => {
