@@ -14,13 +14,13 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <link rel="icon" href="https://yashkumat.github.io/test/logo.jpg" type="image/jpg" sizes="16x16" />
     <meta name="keywords"
-        content="MCQ generator, Exam practice, Learning assessments, Mock questions, CBSE, SSC, ICSE, 10th, 9th, 8th Practice Question" />
+        content="Automated Testing, EdTech, Web Application, Education Technology, Real-Time Analytics, Teacher Tools, Student Performance, MCQ generator, Exam practice, Learning assessments, Mock test, Practice Question" />
     <meta name="author" content="Yash Kumat" />
     <meta property="og:title" content="MCQ App" />
     <meta property="og:type" content="Educational Application" />
     <meta property="og:image" content="https://yashkumat.github.io/test/logo.jpg" />
     <meta property="og:url" content="https://yashkumat.github.io/test/" />
-    <meta name="description" content="Automated test creation made simple! Add questions via Google Sheets, and tests are generated instantly. Real-time analytics." />
+    <meta name="description" content="Automated test creation made simple! Add questions via Google Sheets. Real-time analytics." />
     <style>
         body {
             background: radial-gradient(circle at top right, #6dd5ed, #2193b0);
@@ -75,12 +75,19 @@
             font-weight: bold;
             color: #ffeb3b;
         }
+
+        label {
+            width: auto !important;
+        }
+
+        @media only screen and (max-width: 576px) {
+            label {
+                width: 100% !important;
+            }
+        }
     </style>
-
 </head>
-
 <body>
-
     <div class="container">
         <div class="row">
             <div class="col-md-12 text-center header">
@@ -114,7 +121,6 @@
         </div>
 
     </div>
-
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
@@ -179,7 +185,6 @@
                     document.getElementById('yourname').classList.remove('d-none');
                     controlButton.innerText = 'Submit'
                     controlButton.setAttribute("onClick", "score();");
-
                 })
             })
         }
@@ -203,7 +208,6 @@
             } else {
                 document.getElementById('message').innerHTML = "Please Enter Name"
             }
-
             document.getElementById("your_score").scrollIntoView({ behavior: 'smooth' });
         }
 
@@ -218,9 +222,6 @@
             document.getElementById("test_title").scrollIntoView({ behavior: 'smooth' });
             getQuestions()
         }
-
-
-
     </script>
 </body>
 
