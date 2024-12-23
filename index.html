@@ -137,6 +137,7 @@
             const data = new FormData(form);
             const action = e.target.action;
             document.getElementById('message').innerHTML = "Saving..."
+            controlButton.disabled = true
             fetch(action, {
                 method: 'POST',
                 body: data,
@@ -147,6 +148,7 @@
                     setTimeout(() => {
                         document.getElementById('message').innerHTML = ""
                     }, 1000)
+                    controlButton.disabled = false
                     controlButton.innerHTML = "Reset"
                     controlButton.setAttribute("onClick", "reset_func();");
                 })
