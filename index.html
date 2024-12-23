@@ -198,6 +198,8 @@
                     }, 1000)
                     controlButton.disabled = false
                     controlButton.innerHTML = "Reset"
+                    document.getElementById('questions').classList.remove('d-none');
+                    document.getElementById('submiting_form').classList.add('d-none');
                     controlButton.setAttribute("onClick", "reset_func();");
                 })
         });
