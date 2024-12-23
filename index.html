@@ -206,6 +206,13 @@
                 } else if (selected_ans) {
                     selected_ans.nextElementSibling.classList.add('border-danger')
                 }
+
+                for (let index = 0; index < 4; index++) {
+                    const element = document.getElementById(`opt_${index + 1}_forque${j}`);
+                    if (questions[j].answer == element.value) {
+                        element.nextElementSibling.classList.add('border-success')
+                    }
+                }
             }
             document.getElementById('your_score').innerText = "Your Score: " + your_score + " / " + questions.length;
             document.getElementById('score_hidden').value = your_score
@@ -219,15 +226,7 @@
         }
 
         function reset_func() {
-            var ele = document.getElementsByClassName('btn-check')
-            for (var i = 0; i < ele.length; i++) {
-                ele[i].checked = false;
-            }
-            your_score = 0
-            document.getElementById('yourname').value = "";
-            document.getElementById('your_score').innerText = ""
-            document.getElementById("test_title").scrollIntoView({ behavior: 'smooth' });
-            getQuestions()
+            window.location.reload();
         }
     </script>
 </body>
